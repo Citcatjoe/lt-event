@@ -13,15 +13,17 @@
 		<!-- End Google Tag Manager -->
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Les événements du Temps</title>
+		<title>Le Temps Evenements</title>
         <meta name="description" content="Le Temps propose des événements au sein de sa newsroom. D’une soirée zéro déchet à des concerts en passant par des cours de philosophie pour les enfants, des balades à vélo, ou encore une rencontre avec notre correspondant à Paris." />
 			
-		<link rel="stylesheet" type="text/css" href="{{ app.base_path }}/assets/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="{{ app.base_path }}/assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
 		<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-		<link rel="stylesheet" type="text/css" href="{{ app.base_path }}/assets/css/getmdl-select.min.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/getmdl-select.min.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/owl.carousel.min.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/owl.theme.default.min.css" />
 
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://assets.letemps.ch/themes/custom/letemps/favicons/apple-touch-icon-57x57.png" /> 
 	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://assets.letemps.ch/themes/custom/letemps/favicons/apple-touch-icon-114x114.png" />
@@ -60,10 +62,10 @@
 		<script id="event-template" type="text/x-handlebars-template">
 		{% verbatim %}
 			{{#each post}}
-				<div class="event {{#givesEventPremium custom_fields.event_is_premium }}{{/givesEventPremium}} {{#givesEventCategory categories.0.slug }}{{/givesEventCategory}} {{#givesEventYear custom_fields.event_date }}{{/givesEventYear}} {{#testIfPastEventClass custom_fields.event_date }}{{/testIfPastEventClass}}" data-date="{{#testIfPastEventOrder custom_fields.event_date }}{{/testIfPastEventOrder}}" data-title="{{slug}}">
+				<div class="event {{#givesEventPremium custom_fields.event_is_premium }}{{/givesEventPremium}} {{#givesEventCategory categories.0.slug }}{{/givesEventCategory}} {{#givesEventYear custom_fields.event_date }}{{/givesEventYear}} {{#testIfPastEventClass custom_fields.event_date }}{{/testIfPastEventClass}}" data-status="{{#testIfPastEventClass custom_fields.event_date }}{{/testIfPastEventClass}}" data-date="{{#testIfPastEventOrder custom_fields.event_date id }}{{/testIfPastEventOrder}}" data-title="{{slug}}">
 					<div class="card card-wide mdl-card mdl-shadow--2dp" card-url="https://www.letemps.ch">
 						<div class="card-header mdl-card__title" style="background: url('{{thumbnail_images.et-pb-post-main-image-fullwidth.url}}')">
-							{{#checkIfPremium custom_fields.event_is_premium }}{{/checkIfPremium}}
+							<!--{{#checkIfPremium custom_fields.event_is_premium }}{{/checkIfPremium}}-->
 							<div class="card-overlay">
 								<h1 class="card-title mdl-card__title-text">{{{title}}}</h1>
 							</div>
@@ -75,7 +77,7 @@
 						</div>
 
 						<div class="card-footer mdl-card__supporting-text">
-							<a href="{{custom_fields.event_url}}" target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+							<a href="{{custom_fields.event_url}}" target="_blank" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect {{#testIfPastEventClass custom_fields.event_date }}{{/testIfPastEventClass}}">
 						      Je participe
 						    </a>
 							<!--{{{custom_fields.event_where}}}-->
@@ -144,7 +146,12 @@
 				</div>
 			</div>
 
-			<div class="header-figures"></div>
+			<div class="header-figures owl-carousel owl-theme">
+				<div class="header-figures--item" style="background: url('img/article/berthollet.jpg');"></div>
+				<div class="header-figures--item" style="background: url('img/article/teaser-jardin.jpg');"></div>
+				<div class="header-figures--item" style="background: url('img/article/teaser-repair.jpg');"></div>
+				<div class="header-figures--item" style="background: url('img/article/teaser-redac.jpg');"></div>
+			</div>
 
 		</header>
 
@@ -163,7 +170,7 @@
 						  </fieldset>
 					</div>
 				
-					<div class="hello-form--filters-wrapper--box ">
+					<div class="hello-form--filters-wrapper--box mobile-hidden">
 						<fieldset data-filter-group="category" data-logic="and">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
 						        <input type="text" value="" class="mdl-textfield__input" id="filter-place" readonly>
@@ -183,7 +190,7 @@
 					    </fieldset>
 					</div>
 				
-					<div class="hello-form--filters-wrapper--box margin-negative-top">
+					<!--<div class="hello-form--filters-wrapper--box margin-negative-top">
 						<fieldset data-filter-group="subscription" data-logic="and">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
 						        <input type="text" value="" class="mdl-textfield__input" id="filter-category" readonly>
@@ -198,9 +205,9 @@
 						        </ul>
 						    </div>
 						</fieldset>
-					</div>
+					</div>-->
 
-					<div class="hello-form--filters-wrapper--box margin-negative-top">
+					<div class="hello-form--filters-wrapper--box margin-negative-top mobile-hidden">
 						<fieldset data-filter-group="year" data-logic="and">
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
 						        <input type="text" value="" class="mdl-textfield__input" id="filter-subtype" readonly>
@@ -346,17 +353,18 @@
 		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="{{ app.base_path }}/assets/js/getmdl-select.min.js"></script>
+		<script src="/assets/js/getmdl-select.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+		<script src="/assets/js/owl.carousel.min.js"></script> 
 		
 		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-		<script src="{{ app.base_path }}/assets/js/mixitup.min.js"></script>
-		<script src="{{ app.base_path }}/assets/js/mixitup-pagination.min.js"></script>
-		<script src="{{ app.base_path }}/assets/js/mixitup-multifilter.js"></script>
-		<script src="{{ app.base_path }}/assets/js/main.js?v=1.4"></script> 
+		<script src="/assets/js/mixitup.min.js"></script>
+		<script src="/assets/js/mixitup-pagination.min.js"></script>
+		<script src="/assets/js/mixitup-multifilter.js"></script>
+		<script src="/assets/js/main.js?v=1.4"></script> 
 	</body>
 	
 </html>

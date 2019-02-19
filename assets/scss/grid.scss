@@ -1,10 +1,19 @@
+main 
+{
+    min-height: calc(210px + 50px);
+    //padding-top: calc(210px + 50px);
+
+}
+
 .grid
 {
+
     max-width: 95%;
     width: calc(1000px + 1.333%);
     margin: auto;
     float: none;
     padding: 0;
+    padding-top: calc(210px + 50px - 100px);
     overflow: auto;
 
     @include breakpoint(md) {
@@ -13,6 +22,7 @@
 
     @include breakpoint(sm) {
        max-width: 95%;
+       padding-top: calc(150px + 50px - 100px);
     } 
 
     div.event
@@ -214,6 +224,7 @@
 
   .card-footer 
   {
+    background: white;
     width: 100% !important;
     position: absolute;
     bottom: 0;
@@ -252,4 +263,8 @@
   }
 }
 
-
+.mdl-button.is-passed
+{
+  
+  visibility: hidden;
+}

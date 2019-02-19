@@ -13,7 +13,8 @@ jQuery(document).ready(function($)
     // Générer filtres ?
     //icon partage ? <i class="material-icons md-18">face</i>
 
-    $.getJSON( "http://efbuthzk.preview.infomaniak.website/?json=1&post_type=events&callback=?", function( data ) {
+    //$.getJSON( "http://efbuthzk.preview.infomaniak.website/?json=1&post_type=events&callback=?", function( data ) {
+    $.getJSON( "http://efbuthzk.preview.infomaniak.website/?json=1&post_type=events&callback=?&count=-1", function( data ) {  
        
         //console.log(data);
 
@@ -54,11 +55,12 @@ jQuery(document).ready(function($)
         (day<10 ? '0' : '') + day;
     
 
-    Handlebars.registerHelper('testIfPastEventOrder', function(value, options) {
+    Handlebars.registerHelper('testIfPastEventOrder', function(value, id, options) {
+        console.log(arguments);
         var dateIndex = value;
         if (parseInt(today) > value)
         {
-            dateIndex = parseInt(value) + 10000000;
+            dateIndex = parseInt(value) + (id * (-1000000));
         }
         return dateIndex;
     })
@@ -100,7 +102,7 @@ jQuery(document).ready(function($)
         }
         else
         {
-            datePassedClass = '';
+            datePassedClass = 'a';
         }
         return datePassedClass;
     })
@@ -290,7 +292,7 @@ jQuery(document).ready(function($)
             },
             load: {
                 filter: getSelectorFromHash(),
-                sort: 'date:asc'
+                sort: 'status:asc date:asc'
             },
             callbacks: {
                 onMixStart: function() {
@@ -314,7 +316,8 @@ jQuery(document).ready(function($)
     function stylePagination(){
         $('.mixitup-page-list').find('button').addClass('mdl-button');
     }
-    stylePagination();
+    setTimeout(function(){ stylePagination(); }, 2000);
+    
 
     var $errorMessage = $('.error-message');
     var $resetFiltersButton = $('button.reset-filters');
@@ -361,5 +364,18 @@ jQuery(document).ready(function($)
         }
        
     }
+
+    $('.owl-carousel').owlCarousel({
+        items:1,
+        loop: true,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        autoplayHoverPause: true,
+        animateOut: 'fadeOut',
+        mouseDrag: false,
+        touchDrag: false,
+        pullDrag: false
+    });
 
 });
