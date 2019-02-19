@@ -60,7 +60,8 @@ jQuery(document).ready(function($)
         var dateIndex = value;
         if (parseInt(today) > value)
         {
-            dateIndex = parseInt(value) + (id * (-1000000));
+            //dateIndex = parseInt(value) + (id * (-1000000));
+            dateIndex = parseInt(value) * (-1); 
         }
         return dateIndex;
     })
