@@ -183,14 +183,14 @@ header {
         left: 16px; } }
   .header-top .share-this-page {
     position: absolute;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%); }
+    top: 37%;
+    right: 30px; }
     .header-top .share-this-page > span {
       opacity: .5; }
     @media (max-width: 768px) {
       .header-top .share-this-page {
-        right: 16px; }
+        right: 16px;
+        top: 23%; }
         .header-top .share-this-page h6 {
           font-size: 10px;
           display: none; }
